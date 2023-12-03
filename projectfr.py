@@ -18,16 +18,11 @@ if __name__ == '__main__':
 
     # Paramètres globaux
 
-    # Si USE_CUDA est vrai, les calculs seront effectués en utilisant le GPU (peut ne pas fonctionner sur tous les systèmes)
     # Cela accélérera les calculs
     USE_CUDA = torch.cuda.is_available()
-
     DATASET_PATH = './data'
-
     BATCH_SIZE = 64 # Nombre d'images utilisées pour calculer les gradients à chaque étape
-
-    NUM_EPOCHS = 25 # Nombre de fois où nous parcourons toutes les images d'entraînement. Ne pas dépasser 25
-
+    NUM_EPOCHS = 25 # Nombre de fois où nous parcourons toutes les images d'entraînement.
     LEARNING_RATE = 0.001 # Contrôle de la taille du pas
     MOMENTUM = 0.9 # Momentum pour la descente de gradient
     WEIGHT_DECAY = 0.0005
@@ -209,6 +204,7 @@ if __name__ == '__main__':
         plt.xlabel('Époque')
         plt.ylabel('Perte')
         plt.savefig('outputs/01-loss-cnn.pdf')
+        plt.show()
 
         plt.figure(figsize=(12, 8), num=2)
         plt.clf()
@@ -220,6 +216,7 @@ if __name__ == '__main__':
         plt.xlabel('Époque')
         plt.ylabel('Précision')
         plt.savefig('outputs/02-accuracy-cnn.pdf')
+        plt.show()
 
     #Résultat
     print(f'Perte d\'entraînement finale: {train_loss[-1]}')
