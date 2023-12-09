@@ -3,41 +3,41 @@ import shutil
 import random
 from sklearn.model_selection import train_test_split
 
-# Path to your dataset folder
-dataset_path = './EuroSAT_data'
+# Chemin vers votre dossier de dataset
+chemin_du_dossier_dataset = './EuroSAT_data'
 
-# List all classes in the dataset folder
-classes = os.listdir(dataset_path)
+# Liste de toutes les classes dans le dossier de dataset
+classes = os.listdir(chemin_du_dossier_dataset)
 
-# Create directories for training and testing sets
-train_path = './data/train'
-test_path = './data/test'
+# Création des répertoires pour les ensembles de train et de test
+chemin_entrainement = './data/train'
+chemin_test = './data/test'
 
-if not os.path.exists(train_path):
-    os.makedirs(train_path)
+if not os.path.exists(chemin_entrainement):
+    os.makedirs(chemin_entrainement)
 
-if not os.path.exists(test_path):
-    os.makedirs(test_path)
+if not os.path.exists(chemin_test):
+    os.makedirs(chemin_test)
 
-# Splitting the data into train and test (80% train, 20% test for each class)
-for class_name in classes:
-    print(class_name)
-    class_images = os.listdir(os.path.join(dataset_path, class_name))
-    train_images, test_images = train_test_split(class_images, test_size=0.2, random_state=42)
+# Séparation des données en ensembles d'entraînement et de test (80 % train, 20 % test pour chaque classe)
+for nom_classe in classes:
+    print(nom_classe)
+    images_classe = os.listdir(os.path.join(chemin_du_dossier_dataset, nom_classe))
+    images_entrainement, images_test = train_test_split(images_classe, test_size=0.2, random_state=42)
 
-    # Create folders for each class in train and test sets
-    class_train_path = os.path.join(train_path, class_name)
-    class_test_path = os.path.join(test_path, class_name)
+    # Création des dossiers pour chaque classe dans les ensembles d'entraînement et de test
+    chemin_classe_entrainement = os.path.join(chemin_entrainement, nom_classe)
+    chemin_classe_test = os.path.join(chemin_test, nom_classe)
 
-    if not os.path.exists(class_train_path):
-        os.makedirs(class_train_path)
+    if not os.path.exists(chemin_classe_entrainement):
+        os.makedirs(chemin_classe_entrainement)
 
-    if not os.path.exists(class_test_path):
-        os.makedirs(class_test_path)
+    if not os.path.exists(chemin_classe_test):
+        os.makedirs(chemin_classe_test)
 
-    # Copy images to the respective train and test folders
-    for img in train_images:
-        shutil.copy(os.path.join(dataset_path, class_name, img), os.path.join(class_train_path, img))
+    # Copie des images dans les dossiers d'entraînement et de test respectifs
+    for img in images_entrainement:
+        shutil.copy(os.path.join(chemin_du_dossier_dataset, nom_classe, img), os.path.join(chemin_classe_entrainement, img))
 
-    for img in test_images:
-        shutil.copy(os.path.join(dataset_path, class_name, img), os.path.join(class_test_path, img))
+    for img in images_test:
+        shutil.copy(os.path.join(chemin_du_dossier_dataset, nom_classe, img), os.path.join(chemin_classe_test, img))
